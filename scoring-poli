@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Lanzador del Sistema de Scoring — Oficiales (Flet 1.0).
+set -euo pipefail
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PY="$DIR/.venv/bin/python"
+
+if [ ! -x "$PY" ]; then
+    cat >&2 <<'AYUDA'
+No se encontró el entorno virtual en .venv/
+Creálo con:
+    uv sync
+AYUDA
+    exit 1
+fi
+
+exec "$PY" "$DIR/main.py" "$@"
